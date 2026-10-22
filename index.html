@@ -1,35 +1,94 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <icon rel="icon" href="images.jpg" type="image/x-icon">
+    <link rel="icon" href="Media/images.jpg" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perticato</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
+            background-color: #000;
         }
+
+        #bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
         .box {
             text-align: center;
-            padding: 40px;
-            background: white;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            max-width: 400px;
+            width: 90%;
         }
-        h1 { color: #333; }
-        p { color: #666; }
+
+        h1 { color: #222; margin-bottom: 10px; font-size: 1.8rem; }
+        p { color: #555; font-size: 1rem; }
+
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h1>Boy</h1>
-        <p>Il sito non è ancora pronto. :p</p>
+    <div id="maintenance-view">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="Media/Manutenzione.mp4" type="video/mp4">
+            Il tuo browser non supporta i video HTML5.
+        </video>
+
+        <div class="box">
+            <h1>Boy</h1>
+            <p>Il sito non è ancora pronto. :p</p>
+        </div>
     </div>
+
+    <!-- 2. CONTENUTO REALE DEL SITO (visibile solo a te) -->
+    <div id="site-content" class="hidden">
+        <div style="color: white; padding: 20px; text-align: center;">
+            <h1>Cosa</h1>
+            <p>Questo è il sito reale.</p>
+        </div>
+    </div>
+
+    <script>
+        const SECRET_KEY = "admin"; 
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const ownerAccess = urlParams.get('admin');
+
+        if (ownerAccess === SECRET_KEY || localStorage.getItem('isOwner') === 'true') {
+            localStorage.setItem('isOwner', 'true');
+            document.getElementById('maintenance-view').classList.add('hidden');
+            document.getElementById('site-content').classList.remove('hidden');
+        }
+    </script>
 </body>
 </html>
