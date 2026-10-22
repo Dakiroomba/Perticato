@@ -50,7 +50,21 @@
         }
 
         h1 { color: #222; margin-bottom: 10px; font-size: 1.8rem; }
-        p { color: #555; font-size: 1rem; }
+        p { color: #555; font-size: 1.5rem; margin-bottom: 15px; }
+
+        .audio-btn {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        .audio-btn:hover {
+            background-color: #555;
+        }
 
         .hidden {
             display: none !important;
@@ -58,23 +72,26 @@
     </style>
 </head>
 <body>
+
+    <!-- 1. SCHERMATA MANUTENZIONE -->
     <div id="maintenance-view">
-        <video autoplay muted loop playsinline id="bg-video">
+        <video autoplay loop playsinline id="bg-video">
             <source src="Media/Manutenzione.mp4" type="video/mp4">
             Il tuo browser non supporta i video HTML5.
         </video>
 
         <div class="box">
             <h1>Boy</h1>
-            <p>Il sito non è ancora pronto. :p</p>
+            <p>Il sito non è ancora pronto :p</p>
+            <button class="audio-btn" id="unmute-btn">Attiva Audio</button>
         </div>
     </div>
 
     <!-- 2. CONTENUTO REALE DEL SITO (visibile solo a te) -->
     <div id="site-content" class="hidden">
         <div style="color: white; padding: 20px; text-align: center;">
-            <h1>Cosa</h1>
-            <p>Questo è il sito reale.</p>
+            <h1>Benvenuto</h1>
+            <p>Questo è il sito reale :D</p>
         </div>
     </div>
 
@@ -88,6 +105,24 @@
             localStorage.setItem('isOwner', 'true');
             document.getElementById('maintenance-view').classList.add('hidden');
             document.getElementById('site-content').classList.remove('hidden');
+        } else {
+            const video = document.getElementById('bg-video');
+            const unmuteBtn = document.getElementById ? document.getElementById('unmute-btn') : null;
+
+            video.play().then(() => {
+                if (unmuteBtn) unmuteBtn.style.display = 'none';
+            }).catch(error => {
+                video.muted = true;
+                video.play();
+            });
+
+            if (unmuteBtn) {
+                unmuteBtn.addEventListener('click', function() {
+                    video.muted = false;
+                    video.play();
+                    this.style.display = 'none';
+                });
+            }
         }
     </script>
 </body>
