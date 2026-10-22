@@ -1,6 +1,6 @@
 # Perticato
-Perticato è vita\n
-Perticato è sfiga\n
-Perticato è lima.\n
-Se non credi in Perticato,\n
+Perticato è vita <br>
+Perticato è sfiga <br>
+Perticato è lima. <br>
+Se non credi in Perticato, <br>
 sei annullato!
