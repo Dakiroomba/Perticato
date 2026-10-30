@@ -83,7 +83,7 @@
         <div class="box">
             <h1>Boy</h1>
             <p>Il sito non è ancora pronto :p</p>
-            <button class="audio-btn" id="unmute-btn">Attiva Audio</button>
+            <button class="audio-btn" id="unmute-btn">Disattiva Audio</button>
         </div>
     </div>
 
@@ -112,13 +112,13 @@
             video.play().then(() => {
                 if (unmuteBtn) unmuteBtn.style.display = 'none';
             }).catch(error => {
-                video.muted = true;
+                video.muted = false;
                 video.play();
             });
 
             if (unmuteBtn) {
                 unmuteBtn.addEventListener('click', function() {
-                    video.muted = false;
+                    video.muted = true;
                     video.play();
                     this.style.display = 'none';
                 });
