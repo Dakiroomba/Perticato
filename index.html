@@ -65,6 +65,7 @@
         .audio-btn:hover {
             background-color: #555;
         }
+        p { color: #555; font-size: 1rem; }
 
         .hidden {
             display: none !important;
@@ -72,10 +73,8 @@
     </style>
 </head>
 <body>
-
-    <!-- 1. SCHERMATA MANUTENZIONE -->
     <div id="maintenance-view">
-        <video autoplay loop playsinline id="bg-video">
+        <video autoplay muted loop playsinline id="bg-video">
             <source src="Media/Manutenzione.mp4" type="video/mp4">
             Il tuo browser non supporta i video HTML5.
         </video>
